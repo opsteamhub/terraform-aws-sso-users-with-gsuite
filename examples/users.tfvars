@@ -1,19 +1,24 @@
-```
-variable "users" {}
-variable "sso_groups" {}
-variable "impersonated_user_email" {}
-variable "credentials" {}
-variable "password" {}
-variable "identity_store_id" {}
-
-module "aws-sso" {
-  source = "github.com/opsteamhub/terraform-aws-sso-users-with-gsuite"
-
-  users                   = var.users
-  sso_groups              = var.sso_groups
-  impersonated_user_email = var.impersonated_user_email
-  credentials             = var.credentials
-  password                = var.password
-  identity_store_id       = var.identity_store_id
+sso_groups = {
+  group1 = {
+    description = "Example create group1"
+  },
+  group2 = {
+    description = "Example create group2"
+  }
 }
-```
+
+users = {
+  "user1@ops.team" = {
+    sso_groups          = ["group1"]
+    family_name         = "Example User"
+    create_gsuite_email = true
+    sso_access          = true
+
+  },
+  "example.user2@ops.team" = {
+    sso_groups          = ["group1", "group2"]
+    create_gsuite_email = false
+    is_suspended        = false
+    sso_access          = true
+  }  
+}
