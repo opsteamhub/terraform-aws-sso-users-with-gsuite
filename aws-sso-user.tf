@@ -10,7 +10,10 @@ locals {
 }
 
 resource "aws_identitystore_user" "users" {
-  for_each          = var.users
+  for_each = { for k, v in var.users :
+    k => v if try(v["sso_access"], false) == true
+  }
+  
   identity_store_id = var.identity_store_id
 
   display_name = each.value["family_name"] == "" ? join(" ", [title(regex("^[a-z]*", each.key)), title(replace(try(regex("\\..*@", each.key), ""), "/[\\.|@]/", ""))]) : join(" ", [title(regex("^[a-z]*", each.key)), each.value["family_name"]])

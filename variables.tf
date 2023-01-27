@@ -15,7 +15,7 @@ variable "identity_store_id" {
 }
 
 variable "password" {
-  default = "opsteam@2023!"
+  default = ""
 }
 
 variable "sso_groups" {
