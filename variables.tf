@@ -2,21 +2,13 @@ variable "region" {
   default = "us-east-1"
 }
 
-variable "impersonated_user_email" {
-  default = ""
-}
+variable "impersonated_user_email" {}
 
-variable "credentials" {
-  default = ""
-}
+variable "credentials" {}
 
-variable "identity_store_id" {
-  default = ""
-}
+variable "identity_store_id" {}
 
-variable "password" {
-  default = ""
-}
+variable "password" {}
 
 variable "sso_groups" {
   description = "A map of AWS SSO groups"
@@ -24,7 +16,6 @@ variable "sso_groups" {
     description = optional(string)
   }))
 }
-
 
 variable "users" {
   type = map(object({
@@ -36,7 +27,7 @@ variable "users" {
     create_gsuite_email = optional(bool, false)
     is_suspended        = optional(bool, false)
     update_existing     = optional(bool, true)
-    sso_access          = optional(bool, true)
+    sso_access          = optional(bool, false)
   }))
   default = {}
 }
