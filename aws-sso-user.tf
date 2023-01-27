@@ -4,7 +4,6 @@ locals {
       for group_name in user_attr.sso_groups : {
         user_name  = user_name
         group_name = group_name
-        sso_access = sso_access
       }
     ]
   ])
