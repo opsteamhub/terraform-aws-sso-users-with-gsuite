@@ -36,7 +36,7 @@ variable "users" {
     create_gsuite_email = optional(bool, false)
     is_suspended        = optional(bool, false)
     update_existing     = optional(bool, true)
-    sso_access          = optional(bool, false)
+    sso_access          = optional(bool, true)
   }))
   default = {}
 }
