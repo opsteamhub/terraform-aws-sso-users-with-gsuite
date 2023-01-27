@@ -6,7 +6,7 @@ variable "impersonated_user_email" {
   default = ""
 }
 
-variable "credentials " {
+variable "credentials" {
   default = ""
 }
 
