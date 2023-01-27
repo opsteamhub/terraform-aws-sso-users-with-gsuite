@@ -4,7 +4,6 @@ locals {
       for group_name in user_attr.sso_groups : {
         user_name  = user_name
         group_name = group_name
-        sso_access = sso_access
       }
     ]
   ])
@@ -38,7 +37,8 @@ resource "aws_identitystore_group" "group" {
 }
 
 resource "aws_identitystore_group_membership" "member" {
-  for_each          = { for pair in local.group_membership : "${pair.user_name}.${pair.group_name}" => pair if try(pair["sso_access"], false) == true }
+  for_each          = { for pair in local.group_membership : "${pair.user_name}.${pair.group_name}" => pair }
+
   identity_store_id = var.identity_store_id
   group_id          = aws_identitystore_group.group[each.value.group_name].group_id
   member_id         = aws_identitystore_user.users[each.value.user_name].user_id
