@@ -29,10 +29,10 @@ resource "gsuite_group_members" "members" {
 
   group_email = gsuite_group.group[each.value.group_name].email
  
- depends_on = [
-   gsuite_user.users,
-   gsuite_group.group
- ]
+  depends_on = [
+    gsuite_user.users,
+    gsuite_group.group
+  ]
 
   member {
     email = each.value.user_name
