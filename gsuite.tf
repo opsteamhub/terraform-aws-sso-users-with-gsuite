@@ -31,7 +31,7 @@ resource "gsuite_group_members" "members" {
  
  depends_on = [
    gsuite_user.users,
-   gsuite_group
+   gsuite_group.group
  ]
 
   member {
