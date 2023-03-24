@@ -27,16 +27,13 @@ resource "gsuite_user" "users" {
 resource "gsuite_group_members" "members" {
   for_each = { for pair in local.group_membership : "${pair.user_name}.gsuite.${pair.group_name}" => pair }
 
-  group_email = gsuite_group.group[each.value.group_name].email
- 
+  group = gsuite_group.group[each.value.group_name].email
+  email = each.value.user_name
+  role  = "MEMBER"
+
   depends_on = [
     gsuite_user.users,
     gsuite_group.group
   ]
-
-  member {
-    email = each.value.user_name
-    role  = "MEMBER"
-  }
 }
 
