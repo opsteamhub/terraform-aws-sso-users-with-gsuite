@@ -18,6 +18,10 @@ resource "gsuite_user" "users" {
 
   primary_email = each.key
 
+  aliases = [
+    each.value["aliases"]
+  ]
+
   # If omitted or `true` existing GSuite users defined as Terraform resources will be imported by `terraform apply`.
   update_existing = each.value["update_existing"]
   is_suspended    = each.value["is_suspended"]

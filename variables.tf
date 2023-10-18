@@ -28,6 +28,7 @@ variable "users" {
     is_suspended        = optional(bool, false)
     update_existing     = optional(bool, true)
     sso_access          = optional(bool, false)
+    aliases             = optional(set(string))
   }))
   default = {}
 }
