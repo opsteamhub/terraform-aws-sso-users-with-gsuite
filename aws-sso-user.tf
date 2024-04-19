@@ -40,8 +40,10 @@ resource "aws_identitystore_group" "group" {
 }
 
 resource "aws_identitystore_group_membership" "member" {
-  for_each          = { for pair in local.group_membership :
+  for_each = {
+    for pair in local.group_membership : 
     "${pair.user_name}.${pair.group_name}" => pair 
+    if var.sso_groups[pair.group_name].create_aws_group
   }
 
   identity_store_id = var.identity_store_id
