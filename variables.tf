@@ -13,7 +13,8 @@ variable "password" {}
 variable "sso_groups" {
   description = "A map of AWS SSO groups"
   type = map(object({
-    description = optional(string)
+    description  = optional(string)
+    create_aws_group = optional(bool, false)
   }))
 }
 

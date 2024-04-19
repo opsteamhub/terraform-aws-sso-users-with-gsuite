@@ -29,8 +29,11 @@ resource "aws_identitystore_user" "users" {
   }
 }
 
+
+
 resource "aws_identitystore_group" "group" {
-  for_each          = var.sso_groups
+  for_each          = { for name, group_config in var.sso_groups : name => group_config if group_config.create_aws_group }
+
   display_name      = each.key
   description       = lookup(each.value, "description", null)
   identity_store_id = var.identity_store_id
